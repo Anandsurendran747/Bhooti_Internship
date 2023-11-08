@@ -5,6 +5,7 @@ const app = express();
 
 var anandRouter = require('./router/anand');
 
+app.use(express.urlencoded());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.json());

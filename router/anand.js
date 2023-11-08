@@ -26,5 +26,20 @@ router.get('/task2/blog', (req, res) => {
     res.render('Anand/task2home', { url: url,page:"BLOG" })
 })
 
+router.get('/task3',(req,res)=>{
+    res.render('Anand/task3');
+})
+
+router.post('/calcualte',(req,res)=>{
+    var height=req.body.height;
+    if (req.body.format=='ft') {
+        height=height*30.48;
+    }
+    height = height/100;
+    var bmi = req.body.weight/(height*height);
+    console.log(bmi);
+    res.render('Anand/task3',{bmi:bmi})
+})
+
 
 module.exports = router;
