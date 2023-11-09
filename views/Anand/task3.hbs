@@ -15,8 +15,8 @@
             <option value="ft">FT/IN</option>
         </select>
         <input  style="display: flex"  placeholder="height in cm" type="number" id="cm" name="cm"><br>
-        <input   placeholder="feet" type="number" id="ft" name="feet">
-        <input max="11"  placeholder="inch" type="number" id="inch" name="inch"><br>
+        <input min="0"   placeholder="feet" type="number" id="ft" name="feet">
+        <input min="0" max="11"  placeholder="inch" type="number" id="inch" name="inch"><br>
         <label  for="weight">WEIGHT:</label><br>
         <input required placeholder="in kilo grams" type="number" id="weight" name="weight"><br>
         <input  value="calculate BMI"  type="submit">
