@@ -37,8 +37,8 @@ router.post('/calcualte',(req,res)=>{
     }
     height = height/100;
     var bmi = req.body.weight/(height*height);
-    console.log(bmi);
-    res.render('Anand/task3',{bmi:bmi})
+    var rbmi=Number((bmi).toFixed(1));
+    res.render('Anand/task3',{bmi:rbmi})
 })
 
 
