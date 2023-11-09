@@ -10,17 +10,38 @@
 <body>
     <form onsubmit="validate(event,this)" action="/anand/calcualte" method="POST">
         <label for="height">HEIGHT:</label><br>
-        <select name="format" id="format">
+        <select onchange="convertformat(event)" name="format" id="format">
             <option value="cm">CM</option>
             <option value="ft">FT/IN</option>
         </select>
-        <input required type="text" id="height" name="height"><br>
-        <label for="weight">WEIGHT:</label><br>
+        <input  style="display: flex"  placeholder="height in cm" type="number" id="cm" name="cm"><br>
+        <input   placeholder="feet" type="number" id="ft" name="feet">
+        <input   placeholder="inch" type="number" id="inch" name="inch"><br>
+        <label  for="weight">WEIGHT:</label><br>
         <input required placeholder="in kilo grams" type="number" id="weight" name="weight"><br>
-        <input  type="submit">
+        <input  value="calculate BMI"  type="submit">
     </form>
     <p>BMI:{{bmi}}</p>
 </body>
-
+<script>
+    function convertformat(e){
+        if(e.target.value=='ft'){
+            document.getElementById('ft').style.display="block"
+            document.getElementById('inch').style.display="block"
+            document.getElementById('cm').style.display="none"
+        }
+        if(e.target.value=='cm'){
+            document.getElementById('ft').style.display="none"
+            document.getElementById('inch').style.display="none"
+            document.getElementById('cm').style.display="flex"
+        }
+    }
+    
+</script>
+<style>
+    #ft,#inch{
+        display: none;
+    }
+</style>
 
 </html>
