@@ -8,18 +8,19 @@
 </head>
 
 <body>
-    <form action="/anand/calcualte" method="POST">
+    <form onsubmit="validate(event,this)" action="/anand/calcualte" method="POST">
         <label for="height">HEIGHT:</label><br>
         <select name="format" id="format">
             <option value="cm">CM</option>
             <option value="ft">FT</option>
         </select>
-        <input type="number" id="height" name="height"><br>
+        <input required type="number" id="height" name="height"><br>
         <label for="weight">WEIGHT:</label><br>
-        <input placeholder="in kilo grams" type="number" id="weight" name="weight"><br>
-        <input type="submit">
+        <input required placeholder="in kilo grams" type="number" id="weight" name="weight"><br>
+        <input  type="submit">
     </form>
     <p>BMI:{{bmi}}</p>
 </body>
+
 
 </html>
