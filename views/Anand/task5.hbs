@@ -1,0 +1,18 @@
+<form action="/anand/urlshortner" method="post">
+    <label for="url">ENTER URL:</label>
+    <input name="url" id="url" type="text">
+    <input value="GENERATE URL" type="submit">
+</form>
+</h1>
+{{#if finalURL}}
+<label for="shrturl">Shorted URL : </label>
+<a id="shrturl" href="/anand/gotoURL?url={{url}}">{{finalURL}}</a><br>
+{{/if}}
+
+<a href="/">Back to home</a>
+
+<style>
+    *{
+        margin: 10px;
+    }
+</style>

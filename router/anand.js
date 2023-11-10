@@ -96,5 +96,34 @@ router.get('/viewusers', async (req, res) => {
 })
 
 
+router.get('/task5',(req,res)=>{
+    res.render('Anand/task5',{title:"TASK5-ANAND"})
+})
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+  
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+  
+    return result;
+  }
+  
+  
+
+router.post('/urlshortner',(req,res)=>{
+    const homeUrl = `${req.protocol}://${req.get('host')}`;
+    const randomString = generateRandomString(3);
+    const finalURL=homeUrl+'/'+randomString;
+    console.log(req.body.url);
+    res.render('Anand/task5',{title:"TASK5-ANAND",finalURL:finalURL,url:req.body.url})
+})
+
+router.get('/gotoURL',(req,res)=>{
+    console.log(req.query.url);
+    res.redirect(req.query.url)
+})
 
 module.exports = router;
