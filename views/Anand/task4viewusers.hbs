@@ -1,0 +1,76 @@
+<table border="1">
+    <tr>
+        <th>fname</th>
+        <th>lname</th>
+        <th>dob</th>
+        <th>address</th>
+        <th>pin code</th>
+        <th>phone number</th>
+    </tr>
+
+
+    {{#each data}}
+    <tr>
+        <td>{{this.fname}}</td>
+        <td>{{this.lname}}</td>
+        <td>{{this.dob}}</td>
+        <td>{{this.address}}</td>
+        <td>{{this.pin}}</td>
+        <td>{{this.number}}</td>
+    </tr>
+    {{/each}}
+</table>
+
+<div>
+    <!-- Pagination links -->
+    <a href="/anand/viewusers?page=1">First</a>
+    {{#if fristcondition}}
+    <a href="/anand/viewusers?page={{c2}}">Previous</a>
+    {{/if}}
+
+    <!-- Current page -->
+    <span>Page {{currentPage}} of {{totalPages}}</span>
+
+    <!-- Next and Last links -->
+    {{#if secondconditon}}
+    <a href="/anand/viewusers?page={{c1}}">Next</a>
+    <a href="/anand/viewusers?page={{totalPages}}">Last</a>
+    {{/if}}
+
+
+    <form id="form" action="">
+         <label >COSTOM PAGE:</label>
+        <input max="{{totalpages}}" required placeholder="" type="number" id="page" name="page">
+        <input onsubmit="submitForm()" value="GO" type="submit">
+    </form>
+</div>
+
+<a href="/anand/task4">ADD USER</a>
+<script>
+     function submitForm() {
+            var page = document.getElementById("page").value;
+
+            // Set the action URL with dynamic values
+            console.log(page)
+            var form = document.getElementById("form");
+            form.action = "/anand/viewusers?page=" + encodeURIComponent(page);
+
+            // Submit the form
+            form.submit();
+        }
+</script>
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>

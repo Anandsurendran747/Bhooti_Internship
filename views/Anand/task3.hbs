@@ -1,47 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<form onsubmit="validate(event,this)" action="/anand/calcualte" method="POST">
+    <label for="height">HEIGHT:</label><br>
+    <select onchange="convertformat(event)" name="format" id="format">
+        <option value="cm">CM</option>
+        <option value="ft">FT/IN</option>
+    </select>
+    <input style="display: flex" placeholder="height in cm" type="number" id="cm" name="cm"><br>
+    <input min="0" placeholder="feet" type="number" id="ft" name="feet">
+    <input min="0" max="11" placeholder="inch" type="number" id="inch" name="inch"><br>
+    <label for="weight">WEIGHT:</label><br>
+    <input required placeholder="in kilo grams" type="number" id="weight" name="weight"><br>
+    <input value="calculate BMI" type="submit">
+</form>
+<p>BMI:{{bmi}}</p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TASK3-ANAND</title>
-</head>
-
-<body>
-    <form onsubmit="validate(event,this)" action="/anand/calcualte" method="POST">
-        <label for="height">HEIGHT:</label><br>
-        <select onchange="convertformat(event)" name="format" id="format">
-            <option value="cm">CM</option>
-            <option value="ft">FT/IN</option>
-        </select>
-        <input  style="display: flex"  placeholder="height in cm" type="number" id="cm" name="cm"><br>
-        <input min="0"   placeholder="feet" type="number" id="ft" name="feet">
-        <input min="0" max="11"  placeholder="inch" type="number" id="inch" name="inch"><br>
-        <label  for="weight">WEIGHT:</label><br>
-        <input required placeholder="in kilo grams" type="number" id="weight" name="weight"><br>
-        <input  value="calculate BMI"  type="submit">
-    </form>
-    <p>BMI:{{bmi}}</p>
-</body>
 <script>
-    function convertformat(e){
-        if(e.target.value=='ft'){
-            document.getElementById('ft').style.display="block"
-            document.getElementById('inch').style.display="block"
-            document.getElementById('cm').style.display="none"
+    function convertformat(e) {
+        if (e.target.value == 'ft') {
+            document.getElementById('ft').style.display = "block"
+            document.getElementById('inch').style.display = "block"
+            document.getElementById('cm').style.display = "none"
         }
-        if(e.target.value=='cm'){
-            document.getElementById('ft').style.display="none"
-            document.getElementById('inch').style.display="none"
-            document.getElementById('cm').style.display="flex"
+        if (e.target.value == 'cm') {
+            document.getElementById('ft').style.display = "none"
+            document.getElementById('inch').style.display = "none"
+            document.getElementById('cm').style.display = "flex"
         }
     }
-    
+
 </script>
 <style>
-    #ft,#inch{
+    #ft,
+    #inch {
         display: none;
     }
 </style>
-
-</html>
