@@ -1,5 +1,6 @@
 var express = require('express');
 const User = require('../models/User')
+const URL = require('../models/Url')
 var router = express.Router();
 
 
@@ -67,7 +68,7 @@ function paginateData(page, pageSize, allData) {
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
     var paginatedData = allData.filter((_, index) => index >= start && index <= end);
-    
+
     return paginatedData;
 }
 
@@ -81,49 +82,68 @@ router.get('/viewusers', async (req, res) => {
     var totalpages = Math.ceil(users.length / pageSize);
     console.log(data);
     res.render('Anand/task4viewusers', {
-        data:data,
-        currentPage:page,
+        data: data,
+        currentPage: page,
         fristcondition: page > 1 ? true : false,
         secondconditon: page < totalpages ? true : false,
         totalPages: totalpages,
-        c1:page+1,
-        c2:page-1,
+        c1: page + 1,
+        c2: page - 1,
         title: "TASK4_ANAND-VIEW"
     });
 
 
-   
+
 })
 
 
-router.get('/task5',(req,res)=>{
-    res.render('Anand/task5',{title:"TASK5-ANAND"})
+router.get('/task5', (req, res) => {
+    res.render('Anand/task5', { title: "TASK5-ANAND" })
 })
-function generateRandomString(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-  
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
+function generateRandomString() {
+    const allowedChars = 'abcdefghijklmnopqrstuvwxyz'
+    let shortLink = ''
+
+    for (let i = 0; i < 3; i++) {
+        const randomIndex = Math.floor(Math.random() * allowedChars.length)
+        shortLink += allowedChars.charAt(randomIndex)
     }
-  
-    return result;
-  }
-  
-  
 
-router.post('/urlshortner',(req,res)=>{
-    const homeUrl = `${req.protocol}://${req.get('host')}`;
-    const randomString = generateRandomString(3);
-    const finalURL=homeUrl+'/'+randomString;
+    return shortLink
+
+}
+
+
+
+router.post('/urlshortner', async (req, res) => {
+
+    const randomString = generateRandomString();
+    const finalURL = `${req.protocol}://${req.get('host')}/anand/${randomString}`;
+    const url = new URL({ longURL: req.body.url, shortURL: randomString });
+    await url.save();
     console.log(req.body.url);
-    res.render('Anand/task5',{title:"TASK5-ANAND",finalURL:finalURL,url:req.body.url})
+    res.render('Anand/task5', { title: "TASK5-ANAND", finalURL: finalURL, url: req.body.url })
 })
 
-router.get('/gotoURL',(req,res)=>{
-    console.log(req.query.url);
-    res.redirect(req.query.url)
+router.get('/:randomString', async (req, res) => {
+    console.log('called');
+    const shortlink = req.params.randomString;
+    console.log(shortlink);
+    try {
+        const link = await URL.findOne({ shortURL:shortlink })
+
+        if (link) {
+            const originalLink = link.longURL
+            res.status(301).redirect(`${originalLink}`)
+        } else {
+            res.send('Short Link not found')
+        }
+    } catch (error) {
+        console.error(error)
+        res.send('Internal Server Error')
+    }
+
+
 })
 
 module.exports = router;
