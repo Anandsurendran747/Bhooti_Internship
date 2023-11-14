@@ -2,15 +2,19 @@ const mongoose = require("mongoose");
 //creating new databse model for each user
 const UrlSchema = new mongoose.Schema(
     {
-       longURL:{
-        type:String,
-        require:true
-       },
-       shortURL:{
-        type:String,
-        require:true
-       }
-        
+        _id: {
+            type: Number,
+            require: true
+        },
+        longURL: {
+            type: String,
+            require: true
+        },
+        shortURL: {
+            type: String,
+            require: true
+        }
+
     },
     { timestamps: true }
 );

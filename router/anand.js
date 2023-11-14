@@ -2,9 +2,9 @@ var express = require('express');
 const User = require('../models/User')
 const URL = require('../models/Url')
 var router = express.Router();
-
-
-
+const fs = require('fs')
+const marked  = require('marked')
+const path = require('path')
 router.get('/task1', (req, res) => {
     res.render('Anand/helloworld_anand', { title: "TASK1-ANAND" })
 })
@@ -113,16 +113,48 @@ function generateRandomString() {
 
 }
 
+function stringToInteger(str) {
+    let result = "";
+    for (let i = 0; i < str.length; i++) {
+      result += str.charCodeAt(i);
+    }
+    return parseInt(result, 10);
+  }
+
 
 
 router.post('/urlshortner', async (req, res) => {
 
     const randomString = generateRandomString();
+    const id=stringToInteger(randomString);
     const finalURL = `${req.protocol}://${req.get('host')}/anand/${randomString}`;
-    const url = new URL({ longURL: req.body.url, shortURL: randomString });
+    const url = new URL({_id:id, longURL: req.body.url, shortURL: randomString });
     await url.save();
     console.log(req.body.url);
     res.render('Anand/task5', { title: "TASK5-ANAND", finalURL: finalURL, url: req.body.url })
+})
+
+// router.get('/task6',(req,res)=>{
+//     // const filePath = path.join('public', `markdown.md`)
+//     // const markdown= fs.readFileSync(filePath,'utf8');
+//     // const html=marked.parse(markdown);
+//     res.render('Anand/task6')
+// })
+
+router.get('/task6',(req,res)=>{
+    const filePath = path.join('public', `markdown.md`);
+    // const markdown = req.body.markdown;
+    const markdownContent = fs.readFileSync(filePath, 'utf8');
+    const html=marked.parse(markdownContent);
+    const isHtml=/<\s*([a-zA-Z0-9]+)([^>]*)>/.test(html)
+
+    if (isHtml) {
+        
+        res.render('Anand/task6',{html})
+    }else{
+        res.render('Anand/task6',{message:"There is error in the enterd markdown"})
+    }
+
 })
 
 router.get('/:randomString', async (req, res) => {
@@ -145,5 +177,7 @@ router.get('/:randomString', async (req, res) => {
 
 
 })
+
+
 
 module.exports = router;
