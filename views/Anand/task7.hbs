@@ -34,7 +34,7 @@
         <form>
             {{#if ifpost}}
             <input name="one" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='p'] from:body" hx-post="/anand/task7" hx-target="#second"  type="submit">Click1</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='p'] from:body" hx-post="/anand/task7" hx-target="#second"  type="submit">Click1(alt+ctrl+p)</button>
             {{/if}}
 
         </form>
@@ -44,7 +44,7 @@
         <form >
             {{#if ifpost}}
             <input name="two" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='j'] from:body" hx-post="/anand/task7" hx-target="#third" type="submit">Click2</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='j'] from:body" hx-post="/anand/task7" hx-target="#third" type="submit">Click1(alt+ctrl+j)</button>
             {{/if}}
             {{!-- <h5 id="second">{{val.one}}</h5> --}}
         </form>
@@ -54,7 +54,7 @@
         <form >
             {{#if ifpost}}
             <input name="three" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='k'] from:body" hx-post="/anand/task7" hx-target="#four" type="submit">Click3</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='k'] from:body" hx-post="/anand/task7" hx-target="#four" type="submit">Click1(alt+ctrl+k)</button>
             {{/if}}
         </form>
         <h4 id="third">Count:0</h4>
@@ -63,7 +63,7 @@
         <form >
             {{#if ifpost}}
             <input name="four" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='l'] from:body"  hx-post="/anand/task7" hx-target="#one" type="submit">Click4</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='l'] from:body"  hx-post="/anand/task7" hx-target="#one" type="submit">Click1(alt+ctrl+l)</button>
             {{/if}}
         </form>
         <h4 id="four">Count:0</h4>
