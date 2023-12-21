@@ -1,4 +1,4 @@
-<div class="container">
+<section class="container">
     {{!-- {{#if ifpost}}
     <form class="flex" hx-post="/anand/task7" hx-target="#list2">
         <input name="item" type="text">
@@ -11,7 +11,7 @@
         {{/each}}
     </ol>
     {{/if}}
-    <div class="flex">
+    <section class="flex">
         {{#if ifpost}}
         <form class="flex">
             <input name="d" type="text">
@@ -23,14 +23,14 @@
             <li>{{item}}</li>
             {{/each}}
         </ol>
-    </div>
-    <div class="flex">
+    </section>
+    <section class="flex">
 
-    </div>
-    <div class="flex">
+    </section>
+    <section class="flex">
 
-    </div> --}}
-    <div class="flex">
+    </section> --}}
+    <section class="flex">
         <form hx-post="/anand/task7" hx-target="#second">
             {{#if ifpost}}
             <input name="one" value="1" hidden type="text">
@@ -39,8 +39,8 @@
 
         </form>
         <h4 id="one">Count:0</h4>
-    </div>
-    <div class="flex">
+    </section>
+    <section class="flex">
         <form hx-post="/anand/task7" hx-target="#third">
             {{#if ifpost}}
             <input name="two" value="1" hidden type="text">
@@ -49,8 +49,8 @@
             {{!-- <h5 id="second">{{val.one}}</h5> --}}
         </form>
         <h4 id="second">Count:0</h4>
-    </div>
-    <div class="flex">
+    </section>
+    <section class="flex">
         <form class="flex" hx-post="/anand/task7" hx-target="#four">
             {{#if ifpost}}
             <input name="three" value="1" hidden type="text">
@@ -58,8 +58,8 @@
             {{/if}}
         </form>
         <h4 id="third">Count:0</h4>
-    </div>
-    <div class="flex">
+    </section>
+    <section class="flex">
         <form class="flex" hx-post="/anand/task7" hx-target="#one">
             {{#if ifpost}}
             <input name="four" value="1" hidden type="text">
@@ -67,8 +67,8 @@
             {{/if}}
         </form>
         <h4 id="four">Count:0</h4>
-    </div>
-</div>
+    </section>
+</section>
 <h1 id="second">{{val.one}}</h1>
 <style>
     .container {
