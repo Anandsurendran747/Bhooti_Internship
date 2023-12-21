@@ -1,5 +1,9 @@
 ---
-Title: Typography
+title: Typography
+date: 2023-01-01
+tags:
+  - markdown
+  - front matter
 ---
 
 # Heading 1

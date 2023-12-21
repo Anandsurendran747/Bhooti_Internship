@@ -1,0 +1,90 @@
+<div class="container">
+    {{!-- {{#if ifpost}}
+    <form class="flex" hx-post="/anand/task7" hx-target="#list2">
+        <input name="item" type="text">
+        <input name="num" value="1" type="text" hidden>
+        <input type="submit" value="click">
+    </form>
+    <ol id="list1">
+        {{#each data}}
+        <li>{{item}}</li>
+        {{/each}}
+    </ol>
+    {{/if}}
+    <div class="flex">
+        {{#if ifpost}}
+        <form class="flex">
+            <input name="d" type="text">
+            <input type="submit" value="click">
+        </form>
+        {{/if}}
+        <ol id="list2">
+            {{#each data}}
+            <li>{{item}}</li>
+            {{/each}}
+        </ol>
+    </div>
+    <div class="flex">
+
+    </div>
+    <div class="flex">
+
+    </div> --}}
+    <div class="flex">
+        <form hx-post="/anand/task7" hx-target="#second">
+            {{#if ifpost}}
+            <input name="one" value="1" hidden type="text">
+            <button type="submit">Click1</button>
+            {{/if}}
+
+        </form>
+        <h4 id="one">Count:0</h4>
+    </div>
+    <div class="flex">
+        <form hx-post="/anand/task7" hx-target="#third">
+            {{#if ifpost}}
+            <input name="two" value="1" hidden type="text">
+            <button type="submit">Click2</button>
+            {{/if}}
+            {{!-- <h5 id="second">{{val.one}}</h5> --}}
+        </form>
+        <h4 id="second">Count:0</h4>
+    </div>
+    <div class="flex">
+        <form class="flex" hx-post="/anand/task7" hx-target="#four">
+            {{#if ifpost}}
+            <input name="three" value="1" hidden type="text">
+            <button type="submit">Click3</button>
+            {{/if}}
+        </form>
+        <h4 id="third">Count:0</h4>
+    </div>
+    <div class="flex">
+        <form class="flex" hx-post="/anand/task7" hx-target="#one">
+            {{#if ifpost}}
+            <input name="four" value="1" hidden type="text">
+            <button type="submit">Click4</button>
+            {{/if}}
+        </form>
+        <h4 id="four">Count:0</h4>
+    </div>
+</div>
+<h1 id="second">{{val.one}}</h1>
+<style>
+    .container {
+        margin-top: 30px;
+        display: flex;
+        width: 100%;
+        background-color:darkgrey;
+        padding: 10px;
+
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
