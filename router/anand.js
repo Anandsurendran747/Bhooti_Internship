@@ -288,7 +288,12 @@ router.get('/task6', (req, res) => {
 router.get('/task7',(req,res)=>{
     res.render('Anand/task7',{ifpost:true})
 })
-let data=[]
+let data=[
+    [],
+    [],
+    [],
+    []
+]
 var val={
     "one":0,
     "two":0,
@@ -297,24 +302,32 @@ var val={
 };
 router.post('/task7',(req,res)=>{
     console.log(req.body);
-    // data.push({"item":req.body.item})
-    // console.log(data);
-    var cval;
+    
+    console.log(data);
+    // var cval;
+    var listItems;
     if (req.body.one) {
-        val.one++
-        cval=val.one
+        data[0].push({"item":req.body.item})
+        listItems = data[0].map(item => `<li>${item.item}</li>`).join('');
     }else if(req.body.two){
-        val.two++
-        cval=val.two
+        data[1].push({"item":req.body.item})
+        listItems = data[1].map(item => `<li>${item.item}</li>`).join('');
     }else if(req.body.three){
-        val.three++
-        cval=val.three
+        data[2].push({"item":req.body.item})
+        listItems = data[2].map(item => `<li>${item.item}</li>`).join('');
     }else if(req.body.four){
-        val.four++
-        cval=val.four
+        data[3].push({"item":req.body.item})
+        listItems = data[3].map(item => `<li>${item.item}</li>`).join('');
     }
-    console.log(val);
-    res.send(`Count:${cval}`)
+    // console.log(val);
+    // res.send(`{{#each ${data}}}
+    // <li>{{${this.item}}}</li>
+    // {{/each}}`)
+   
+
+  // Respond with the HTML list
+  const responseHtml = `<ol>${listItems}</ol>`;
+  res.send(responseHtml);
 })
 
 router.get('/:randomString', async (req, res) => {

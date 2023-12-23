@@ -1,16 +1,17 @@
 <section class="container">
-    {{!-- {{#if ifpost}}
-    <form class="flex" hx-post="/anand/task7" hx-target="#list2">
-        <input name="item" type="text">
-        <input name="num" value="1" type="text" hidden>
-        <input type="submit" value="click">
-    </form>
-    <ol id="list1">
-        {{#each data}}
-        <li>{{item}}</li>
-        {{/each}}
-    </ol>
-    {{/if}}
+    {{!-- <section class="flex">
+        {{#if ifpost}}
+        <form hx-post="/anand/task7" hx-target="#list2">
+            <input name="item" type="text">
+            <input name="num" value="1" type="text" hidden>
+            <input type="submit" value="click">
+        </form>
+        <div id="list">
+
+        </div>
+        {{/if}}
+    </section>
+
     <section class="flex">
         {{#if ifpost}}
         <form class="flex">
@@ -18,11 +19,9 @@
             <input type="submit" value="click">
         </form>
         {{/if}}
-        <ol id="list2">
-            {{#each data}}
-            <li>{{item}}</li>
-            {{/each}}
-        </ol>
+        <div id="list2">
+
+        </div>
     </section>
     <section class="flex">
 
@@ -30,43 +29,59 @@
     <section class="flex">
 
     </section> --}}
+    
     <section class="flex">
         <form>
             {{#if ifpost}}
+            <input name="item" type="text">
             <input name="one" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='p'] from:body" hx-post="/anand/task7" hx-target="#second"  type="submit">Click1(alt+ctrl+p)</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='p'] from:body" hx-post="/anand/task7"
+                hx-target="#list2" type="submit">Click1(alt+ctrl+p)</button>
             {{/if}}
 
         </form>
-        <h4 id="one">Count:0</h4>
+        <div id="list1">
+
+        </div>
     </section>
     <section class="flex">
-        <form >
+        <form>
             {{#if ifpost}}
+            <input name="item" type="text">
             <input name="two" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='j'] from:body" hx-post="/anand/task7" hx-target="#third" type="submit">Click1(alt+ctrl+j)</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='j'] from:body" hx-post="/anand/task7"
+                hx-target="#list3" type="submit">Click1(alt+ctrl+j)</button>
             {{/if}}
-            {{!-- <h5 id="second">{{val.one}}</h5> --}}
         </form>
-        <h4 id="second">Count:0</h4>
+        <div id="list2">
+
+        </div>
     </section>
     <section class="flex">
-        <form >
+        <form>
             {{#if ifpost}}
+            <input name="item" type="text">
             <input name="three" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='k'] from:body" hx-post="/anand/task7" hx-target="#four" type="submit">Click1(alt+ctrl+k)</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='k'] from:body" hx-post="/anand/task7"
+                hx-target="#list4" type="submit">Click1(alt+ctrl+k)</button>
             {{/if}}
         </form>
-        <h4 id="third">Count:0</h4>
+        <div id="list3">
+
+        </div>
     </section>
     <section class="flex">
-        <form >
+        <form>
             {{#if ifpost}}
+            <input name="item" type="text">
             <input name="four" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='l'] from:body"  hx-post="/anand/task7" hx-target="#one" type="submit">Click1(alt+ctrl+l)</button>
+            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='l'] from:body" hx-post="/anand/task7"
+                hx-target="#list1" type="submit">Click1(alt+ctrl+l)</button>
             {{/if}}
         </form>
-        <h4 id="four">Count:0</h4>
+        <div id="list4">
+
+        </div>
     </section>
 </section>
 <h1 id="second">{{val.one}}</h1>
@@ -75,8 +90,7 @@
         margin-top: 30px;
         display: flex;
         width: 100%;
-        background-color:darkgrey;
-        padding: 10px;
+        background-color: darkgrey;
 
     }
 
@@ -85,6 +99,11 @@
         flex-direction: column;
         flex: 1;
         align-items: center;
-        justify-content: center;
+    }
+    #list1,#list2,#list3,#list4{
+        width: 100%;
+        display: flex;align-items: center;
+        color: white;
+        font-size: large;
     }
 </style>
