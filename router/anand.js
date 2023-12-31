@@ -3,7 +3,7 @@ const User = require('../models/User')
 const URLS = require('../models/Url')
 const { URL } = require('url');
 var router = express.Router();
-const axios  = require('axios')
+const axios = require('axios')
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -169,21 +169,21 @@ function stringToInteger(str) {
 
 
 router.post('/URLshortner', async (req, res) => {
-    
-    const letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    let result=[];
+
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    let result = [];
     for (let i = 0; i < letters.length; i++) {
         for (let j = 0; j < letters.length; j++) {
             for (let k = 0; k < letters.length; k++) {
-                result.push({'shortlink':letters[i]+letters[j]+letters[k]})
+                result.push({ 'shortlink': letters[i] + letters[j] + letters[k] })
                 // const short =new ShortLinks({shorlink:letters[i]+letters[j]+letters[k]})
                 // await short.save()
 
                 // console.log(letters[i]+letters[j]+letters[k]);
             }
-            
+
         }
-        
+
     }
     console.log(result);
 
@@ -285,14 +285,14 @@ router.get('/task6', (req, res) => {
     }
 
 })
-router.get('/task7',(req,res)=>{
-    res.render('Anand/task7',{ifpost:true})
+router.get('/task7', (req, res) => {
+    res.render('Anand/task7', { ifpost: true })
 })
 
-router.post('/task7',(req,res)=>{
+router.post('/task7', (req, res) => {
     // console.log(req);
-    
-    
+
+
     // var cval;
     // var listItems;
     // if (req.body.one) {
@@ -312,45 +312,68 @@ router.post('/task7',(req,res)=>{
     // res.send(`{{#each ${data}}}
     // <li>{{${this.item}}}</li>
     // {{/each}}`)
-   
 
-//   const list = req.body.list;
-//   list.push(`<li>${req.body.item}</li>`)
 
- var count=req.body.childCount
-var position=req.body.position
- console.log('position'+position);
- console.log('count'+count);
-//  if (position==1) {
-//     res.send(`<li >${req.body.item}</li>`)
-//  }else if(position>1){
-//    console.log('positon:'+position);
+    //   const list = req.body.list;
+    //   list.push(`<li>${req.body.item}</li>`)
+
+    var count = req.body.childCount
+    var position = req.body.position
+    console.log('position' + position);
+    console.log('count' + count);
+    //  if (position==1) {
+    //     res.send(`<li >${req.body.item}</li>`)
+    //  }else if(position>1){
+    //    console.log('positon:'+position);
     // res.set('HX-Retarget', `#list2>li:nth-child(${position})`)
-    if (count==0) {
+    if (count == 0) {
         res.send(`
-  <li >${req.body.item}</li>
+  <li >${req.body.item}<button hx-post="/anand/edit-item" hx-vars="{text:'${req.body.item}'}" hx-target="closest li">edit</button>
+  <button hx-confirm="Are you sure you want to delete this item?" hx-post='/anand/delete-item' hx-target='closest li' hx-swap='delete' >delete</button>
+  </li>
   `);
-    }else if(position==1){
-        res.set('HX-Reswap','afterbegin')
+    } else if (position == 1) {
+        res.set('HX-Reswap', 'afterbegin')
         // res.set('HX-Retarget', `#list2>li:nth-child(${position-1})`)
         res.send(`
-        <li >${req.body.item}</li>
+        <li >${req.body.item}
+        <button hx-post="/anand/edit-item" hx-vars="{text:'${req.body.item}'}" hx-target="closest li">edit</button>
+        <button hx-confirm="Are you sure you want to delete this item?" hx-post='/anand/delete-item' hx-target='closest li' hx-swap='delete' >delete</button>
+        </li>
         `);
     }
-    
-    else{
-        res.set('HX-Reswap','afterend')
-        res.set('HX-Retarget', `#list${req.body.num}>li:nth-child(${position-1})`)
+
+    else {
+        res.set('HX-Reswap', 'afterend')
+        res.set('HX-Retarget', `#list${req.body.num}>li:nth-child(${position - 1})`)
         res.send(`
-    <li >${req.body.item}</li>
+    <li >${req.body.item}
+    <button hx-post="/anand/edit-item" hx-vars="{text:'${req.body.item}'}" hx-target="closest li">edit</button>
+    <button hx-confirm="Are you sure you want to delete this item?" hx-post='/anand/delete-item' hx-target='closest li' hx-swap='delete' >delete</button>
+    </li>
         `);
     }
-    
-//  }
-  
+
+    //  }
+
 })
-router.post('/add_dropdown',(req,res)=>{
-    var count=parseInt(req.body.childCount)+2
+router.post('/edit-item', (req, res) => {
+    console.log(req.body.text);
+    res.send(`<form hx-post="/anand/make-edit" hx-swap="innerHtml" hx-target="closest li" ><input name="text" value="${req.body.text}" type="text"/>
+    <button type="sumbit">submit</button></form>
+    `)
+})
+router.post('/make-edit', (req, res) => {
+    res.send(`${req.body.text}<button hx-post="/anand/edit-item" hx-vars="{text:'${req.body.text}'}" hx-target="closest li">edit</button>`)
+})
+
+router.post('/delete-item',(req,res)=>{
+   
+    res.send('');
+})
+
+router.post('/add_dropdown', (req, res) => {
+    var count = parseInt(req.body.childCount) + 2
 
     res.send(`<option value="${count}" selected>${count}</option>`)
 })
