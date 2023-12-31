@@ -1,5 +1,6 @@
 const express = require('express')
 var hbs = require('express-handlebars')
+const parser=require('body-parser')
 var path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -7,7 +8,7 @@ const app = express();
 
 var anandRouter = require('./router/anand');
 
-
+app.use(parser.urlencoded({ extended: true }));
 
 app.use(express.urlencoded());
 app.set('views', __dirname + '/views');

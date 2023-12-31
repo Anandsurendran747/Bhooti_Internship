@@ -288,46 +288,71 @@ router.get('/task6', (req, res) => {
 router.get('/task7',(req,res)=>{
     res.render('Anand/task7',{ifpost:true})
 })
-let data=[
-    [],
-    [],
-    [],
-    []
-]
-var val={
-    "one":0,
-    "two":0,
-    "three":0,
-    "four":0
-};
+
 router.post('/task7',(req,res)=>{
-    console.log(req.body);
+    // console.log(req);
     
-    console.log(data);
+    
     // var cval;
-    var listItems;
-    if (req.body.one) {
-        data[0].push({"item":req.body.item})
-        listItems = data[0].map(item => `<li>${item.item}</li>`).join('');
-    }else if(req.body.two){
-        data[1].push({"item":req.body.item})
-        listItems = data[1].map(item => `<li>${item.item}</li>`).join('');
-    }else if(req.body.three){
-        data[2].push({"item":req.body.item})
-        listItems = data[2].map(item => `<li>${item.item}</li>`).join('');
-    }else if(req.body.four){
-        data[3].push({"item":req.body.item})
-        listItems = data[3].map(item => `<li>${item.item}</li>`).join('');
-    }
+    // var listItems;
+    // if (req.body.one) {
+    //     data[0].push({"item":req.body.item})
+    //     listItems = data[0].map(item => `<li>${item.item}</li>`).join('');
+    // }else if(req.body.two){
+    //     data[1].push({"item":req.body.item})
+    //     listItems = data[1].map(item => `<li>${item.item}</li>`).join('');
+    // }else if(req.body.three){
+    //     data[2].push({"item":req.body.item})
+    //     listItems = data[2].map(item => `<li>${item.item}</li>`).join('');
+    // }else if(req.body.four){
+    //     data[3].push({"item":req.body.item})
+    //     listItems = data[3].map(item => `<li>${item.item}</li>`).join('');
+    // }
     // console.log(val);
     // res.send(`{{#each ${data}}}
     // <li>{{${this.item}}}</li>
     // {{/each}}`)
    
 
-  // Respond with the HTML list
-  const responseHtml = `<ol>${listItems}</ol>`;
-  res.send(responseHtml);
+//   const list = req.body.list;
+//   list.push(`<li>${req.body.item}</li>`)
+
+ var count=req.body.childCount
+var position=req.body.position
+ console.log('position'+position);
+ console.log('count'+count);
+//  if (position==1) {
+//     res.send(`<li >${req.body.item}</li>`)
+//  }else if(position>1){
+//    console.log('positon:'+position);
+    // res.set('HX-Retarget', `#list2>li:nth-child(${position})`)
+    if (count==0) {
+        res.send(`
+  <li >${req.body.item}</li>
+  `);
+    }else if(position==1){
+        res.set('HX-Reswap','afterbegin')
+        // res.set('HX-Retarget', `#list2>li:nth-child(${position-1})`)
+        res.send(`
+        <li >${req.body.item}</li>
+        `);
+    }
+    
+    else{
+        res.set('HX-Reswap','afterend')
+        res.set('HX-Retarget', `#list${req.body.num}>li:nth-child(${position-1})`)
+        res.send(`
+    <li >${req.body.item}</li>
+        `);
+    }
+    
+//  }
+  
+})
+router.post('/add_dropdown',(req,res)=>{
+    var count=parseInt(req.body.childCount)+2
+
+    res.send(`<option value="${count}" selected>${count}</option>`)
 })
 
 router.get('/:randomString', async (req, res) => {

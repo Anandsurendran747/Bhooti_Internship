@@ -29,59 +29,85 @@
     <section class="flex">
 
     </section> --}}
-    
+
     <section class="flex">
-        <form>
+        <form hx-on::after-request="this.reset()" hx-post="/anand/task7"
+            hx-vals="js:{&quot;childCount&quot;: document.querySelectorAll(&quot;#list2 li&quot;).length}"
+            hx-swap="innerHtml" hx-target="#list2">
             {{#if ifpost}}
             <input name="item" type="text">
-            <input name="one" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='p'] from:body" hx-post="/anand/task7"
-                hx-target="#list2" type="submit">Click1(alt+ctrl+p)</button>
+            <input name="num" value="2" hidden type="text">
+            <select hx-trigger="programClick1" hx-post="/anand/add_dropdown" hx-target="this" hx-swap="beforeend"
+                hx-vars="{&quot;childCount&quot;: document.querySelectorAll(&quot;#list2 li&quot;).length}"
+                name="position" id="select1">
+                <option value="1" selected>1</option>
+            </select>
+            <button id="submit1" type="submit">Click1</button>
             {{/if}}
 
         </form>
-        <div id="list1">
+        <ol id="list1">
 
-        </div>
+        </ol>
+
     </section>
     <section class="flex">
-        <form>
+        <form hx-on::after-request="this.reset()" hx-post="/anand/task7"
+            hx-vals="js:{&quot;childCount&quot;: document.querySelectorAll(&quot;#list3 li&quot;).length}"
+            hx-swap="innerHtml" hx-target="#list3">
             {{#if ifpost}}
-            <input name="item" type="text">
-            <input name="two" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='j'] from:body" hx-post="/anand/task7"
-                hx-target="#list3" type="submit">Click1(alt+ctrl+j)</button>
+            <input name="item" id="newItemInput" type="text">
+            <input name="num" value="3" hidden type="text">
+            <select hx-trigger="programClick2" hx-post="/anand/add_dropdown" hx-target="this" hx-swap="beforeend"
+                hx-vars="{&quot;childCount&quot;: document.querySelectorAll(&quot;#list3 li&quot;).length}"
+                name="position" id="select2">
+                <option value="1" selected>1</option>
+            </select>
+            <button id="submit2" type="submit">Click2</button>
             {{/if}}
         </form>
-        <div id="list2">
+        <ol id="list2">
 
-        </div>
+        </ol>
     </section>
-    <section class="flex">
-        <form>
+
+    <section hx-on::after-request="this.reset()" class="flex">
+        <form hx-post="/anand/task7"
+            hx-vals="js:{&quot;childCount&quot;: document.querySelectorAll(&quot;#list4 li&quot;).length}"
+            hx-swap="innerHtml" hx-target="#list4">
             {{#if ifpost}}
             <input name="item" type="text">
-            <input name="three" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='k'] from:body" hx-post="/anand/task7"
-                hx-target="#list4" type="submit">Click1(alt+ctrl+k)</button>
+            <input name="num" value="4" hidden type="text">
+            <select hx-trigger="programClick3" hx-post="/anand/add_dropdown" hx-target="this" hx-swap="beforeend"
+                hx-vars="{&quot;childCount&quot;: document.querySelectorAll(&quot;#list4 li&quot;).length}"
+                name="position" id="select3">
+                <option value="1">1</option>
+            </select>
+            <button id="submit3" type="submit">Click3</button>
             {{/if}}
         </form>
-        <div id="list3">
+        <ol id="list3">
 
-        </div>
+        </ol>
     </section>
-    <section class="flex">
-        <form>
+    <section hx-on::after-request="this.reset()" class="flex">
+        <form hx-post="/anand/task7"
+            hx-vals="js:{&quot;childCount&quot;: document.querySelectorAll(&quot;#list1 li&quot;).length}"
+            hx-swap="innerHtml" hx-target="#list1">
             {{#if ifpost}}
             <input name="item" type="text">
-            <input name="four" value="1" hidden type="text">
-            <button hx-trigger="click, keyup[altKey&&ctrlKey&&key=='l'] from:body" hx-post="/anand/task7"
-                hx-target="#list1" type="submit">Click1(alt+ctrl+l)</button>
+            <input name="num" value="1" hidden type="text">
+            <select hx-trigger="programClick4" hx-post="/anand/add_dropdown" hx-target="this" hx-swap="beforeend"
+                hx-vars="{&quot;childCount&quot;: document.querySelectorAll(&quot;#list1 li&quot;).length}"
+                name="position" id="select4">
+                <option value="1">1</option>
+            </select>
+            <button id="submit4" type="submit">Click4</button>
             {{/if}}
         </form>
-        <div id="list4">
+        <ol id="list4">
 
-        </div>
+        </ol>
     </section>
 </section>
 <h1 id="second">{{val.one}}</h1>
@@ -95,15 +121,34 @@
     }
 
     .flex {
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         flex: 1;
         align-items: center;
     }
-    #list1,#list2,#list3,#list4{
+
+    #list1,
+    #list2,
+    #list3,
+    #list4 {
         width: 100%;
-        display: flex;align-items: center;
         color: white;
         font-size: large;
     }
 </style>
+<script>
+
+    document.getElementById('submit1').addEventListener('click', function () {
+        document.getElementById('select1').dispatchEvent(new Event('programClick1'));
+    });
+    document.getElementById('submit2').addEventListener('click', function () {
+        document.getElementById('select2').dispatchEvent(new Event('programClick2'));
+    });
+    document.getElementById('submit3').addEventListener('click', function () {
+        document.getElementById('select3').dispatchEvent(new Event('programClick3'));
+    });
+    document.getElementById('submit4').addEventListener('click', function () {
+        document.getElementById('select4').dispatchEvent(new Event('programClick4'));
+    });
+</script>
